@@ -6,14 +6,17 @@ import { HttpModule } from '@angular/http'
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HttpComponent } from "./http.component";
 import { LibrariesComponent } from "./libraries.component";
+import { NewLibraryComponent } from "./new.library.component"
+import {LibrarySerivce} from "./library.service";
+import {PageNotFoundComponent} from "./not-found.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HttpComponent,
-    LibrariesComponent
+    LibrariesComponent,
+    NewLibraryComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { LibrariesComponent } from "./libraries.component";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [LibrarySerivce],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

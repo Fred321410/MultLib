@@ -1,3 +1,10 @@
-<h2>
-  {{title}}
-</h2>
+
+<div style="float: left; width: 25%">
+  <div class="list-group">
+    <a *ngFor="let library of libraries" (click)="onSelect(library)" [class.active]="library === selectedLibrary" class="list-group-item">
+      <span class="badge">{{library.id}}</span>{{library.name}}
+    </a>
+  </div>
+</div>
+<!--<my-hero-detail [hero]="selectedLibrary"></my-hero-detail>-->
+

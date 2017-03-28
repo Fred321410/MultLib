@@ -6,11 +6,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class HttpSerivce{
+export class LibrarySerivce{
   constructor (private _http: Http) {}
 
-  getTag() {
-    return this._http.get('/api/tag?name=Test')
+  getLibraries() {
+    return this._http.get('/api/library/get')
       .map((response:Response) => response.json())
       .catch(this._errorHandler);
   }

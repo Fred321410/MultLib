@@ -1,9 +1,17 @@
-<h1>
-  {{title}}
-</h1>
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><a routerLink="/libraries" routerLinkActive="active">Access your Library</a></li>
-  <li role="presentation"><a routerLink="/newlibrary" routerLinkActive="active">New Library</a></li>
-</ul>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+  </div>
+</nav>
+<div class="jumbotron">
+  <div class="container">
+    <h1><img alt="MultLib" class=".img-rounded" width="50px" src="./images/library.png"
+    style="margin-bottom: 15px;margin-right: 5px">{{title}}</h1>
+    <p>Create and manage multiple libraries !!</p>
+    <div><a routerLink="/libraries" routerLinkActive="active" class="btn btn-primary btn-lg" role="button">Access your Libraries</a>
+    <a routerLink="/new-library" routerLinkActive="active" class="btn btn-primary btn-lg" role="button">New Library</a></div>
+  </div>
+</div>
 <router-outlet></router-outlet>
-
