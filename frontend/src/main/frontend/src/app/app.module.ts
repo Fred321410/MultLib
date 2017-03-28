@@ -6,15 +6,17 @@ import { HttpModule } from '@angular/http'
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { LibrariesComponent } from "./libraries.component";
-import { NewLibraryComponent } from "./new.library.component"
-import {LibrarySerivce} from "./library.service";
+import { LibrariesComponent } from "./library/libraries.component";
+import { NewLibraryComponent } from "./library/new.library.component"
+import {LibrarySerivce} from "./library/library.service";
 import {PageNotFoundComponent} from "./not-found.component";
+import {LibraryDetailsComponent} from "./library/library.details.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LibrariesComponent,
+    LibraryDetailsComponent,
     NewLibraryComponent,
     PageNotFoundComponent
   ],

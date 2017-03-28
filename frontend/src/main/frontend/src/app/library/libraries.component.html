@@ -1,0 +1,12 @@
+
+<div class="panel panel-primary" style="float: left; width: 35%">
+  <div class="panel-body">
+    <div class="list-group">
+      <a *ngFor="let library of libraries" (click)="onSelect(library)" [class.active]="library === selectedLibrary" class="list-group-item">
+        <span class="badge">{{library.id}}</span>{{library.name}}
+      </a>
+    </div>
+  </div>
+</div>
+<library-details style="float: right; width: 62%" [library]="selectedLibrary"></library-details>
+
