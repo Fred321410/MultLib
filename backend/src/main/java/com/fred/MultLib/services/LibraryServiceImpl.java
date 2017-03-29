@@ -31,8 +31,8 @@ public class LibraryServiceImpl implements LibraryService {
         return libraryDao.findAll();
     }
 
-    public Library add(String name, String description){
-        Library l = new Library(name, description);
+    public Library add(Library library){
+        Library l = new Library(library.getName(), library.getDescription());
         try {
             l = libraryDao.save(l);
         }

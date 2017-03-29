@@ -38,14 +38,14 @@ public class LibraryController {
     }
 
     @RequestMapping(path = "/add",method = RequestMethod.POST)
-    public Library add(@RequestParam(value = "name", required = true) String name, @RequestParam(value = "description", required = false) String description) {
-        Library t;
+    public @ResponseBody Library add(@RequestBody Library library) {
+        System.out.println(library);
         try {
-            t = libraryService.add(name, description);
+            library = libraryService.add(library);
         } catch (Exception ex) {
             throw (ex);
         }
-        return t;
+        return library;
     }
 
 

@@ -1,5 +1,7 @@
 export class Library {
-  id: number;
-  name: string;
-  description: string;
+  constructor(
+    public name: string,
+    public description: string,
+    public id?: number
+  ){}
 }

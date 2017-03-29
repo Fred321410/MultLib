@@ -1,5 +1,6 @@
 
 <div class="panel panel-primary" style="float: left; width: 35%">
+  <div class="panel-heading">Your current libraries</div>
   <div class="panel-body">
     <div class="list-group">
       <a *ngFor="let library of libraries" (click)="onSelect(library)" [class.active]="library === selectedLibrary" class="list-group-item">

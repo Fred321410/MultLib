@@ -10,6 +10,6 @@ public interface LibraryService {
 
     List<Library> getAll();
 
-    Library add(String name, String description);
+    Library add(Library library);
 
 }
