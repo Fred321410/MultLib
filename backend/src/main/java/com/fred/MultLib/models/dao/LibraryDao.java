@@ -10,9 +10,8 @@ import java.util.List;
 @Repository
 public interface LibraryDao extends JpaRepository<Library, Long> {
 
-    Library findByName(String name);
+    Library findByLibraryId(int libraryId);
 
-    List findAll();
-
+    List<Library> findAll();
 
 }

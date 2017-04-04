@@ -6,10 +6,15 @@ import java.util.List;
 
 public interface LibraryService {
 
-    Library getTagByName(String name);
+
+
+    List<Library> getLibraryByLibraryId(int libraryId);
 
     List<Library> getAll();
 
     Library add(Library library);
+
+    void delete(Library library);
+
 
 }

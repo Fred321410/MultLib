@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" required
-               [(ngModel)]="model.name" name="name"
+               [(ngModel)]="library.libraryName" name="name"
                #name="ngModel">
         <div [hidden]="name.valid || name.pristine"
              class="alert alert-danger">
@@ -16,9 +16,12 @@
       <div class="form-group">
         <label for="description">Description</label>
         <textarea class="form-control" rows="2" id="description"
-                  [(ngModel)]="model.description" name="description"></textarea>
+                  [(ngModel)]="library.libraryDescription" name="description"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!libraryForm.form.valid" (click)="newLibrary(); libraryForm.reset()">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!libraryForm.form.valid" (click)="newLibrary(); libraryForm.reset()">
+        <i class="fa fa-floppy-o fa-lg"></i> Submit</button>
+
+
     </form>
   </div>
 </div>

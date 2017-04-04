@@ -15,31 +15,23 @@ public class LibraryController {
     @Autowired
     private LibraryServiceImpl libraryService;
 
-    @RequestMapping(path = "/getByName", method = RequestMethod.GET)
-    public Library getTagByName(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
-        Library t;
-        try {
-            t = libraryService.getTagByName(name);
-        } catch (Exception ex) {
-            return null;
-        }
-        return t;
-    }
-
-    @RequestMapping(path = "/get", method = RequestMethod.GET)
-    public List<Library> getAll() {
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Library> get(@RequestParam(value = "libraryId", required = false) Integer libraryId) {
         List<Library> libraries;
         try {
-            libraries = libraryService.getAll();
+            if(libraryId == null){
+                libraries = libraryService.getAll();
+            } else {
+                libraries = libraryService.getLibraryByLibraryId(libraryId);
+            }
         } catch (Exception ex) {
             return null;
         }
         return libraries;
     }
 
-    @RequestMapping(path = "/add",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody Library add(@RequestBody Library library) {
-        System.out.println(library);
         try {
             library = libraryService.add(library);
         } catch (Exception ex) {
@@ -48,6 +40,14 @@ public class LibraryController {
         return library;
     }
 
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestBody Library library) {
+        try {
+            libraryService.delete(library);
+        } catch (Exception ex) {
+            throw (ex);
+        }
+    }
 
 
 }

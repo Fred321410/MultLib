@@ -1,8 +1,12 @@
 package com.fred.MultLib.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="library")
@@ -10,70 +14,110 @@ public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(name="library_id")
+    private int libraryId;
 
     @NotNull
-    private String name;
+    @Column(name="library_name", unique = true)
+    private String libraryName;
 
-    private String description;
+    @Column(name="library_description")
+    private String libraryDescription;
 
-    private Timestamp creationDate;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date")
+    private Date creationDate;
 
-    private Timestamp modificationDate;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modification_date")
+    private Date modificationDate;
+
+    @OneToMany(mappedBy="library")
+    private Set<Element> elements;
+
+    @OneToMany(mappedBy="library")
+    private Set<Tag> tags;
 
 
     public Library(){}
 
-    public Library(int id){
-        this.id = id;
+    public Library(int libraryId){
+        this.libraryId = libraryId;
     }
 
-    public Library(String name) {
-        this.name = name;
+    public Library(String libraryName) {
+        this.libraryName = libraryName;
     }
 
-    public Library(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Library(String libraryName, String libraryDescription) {
+        this.libraryName = libraryName;
+        this.libraryDescription = libraryDescription;
     }
 
-    public String getName() {
-        return name;
+    public String getLibraryName() {
+        return libraryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLibraryName(String libraryName) {
+        this.libraryName = libraryName;
     }
 
-    public int getId() {
-        return id;
+    public int getLibraryId() {
+        return libraryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLibraryId(int libraryId) {
+        this.libraryId = libraryId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLibraryDescription() {
+        return libraryDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLibraryDescription(String libraryDescription) {
+        this.libraryDescription = libraryDescription;
     }
 
-    public Timestamp getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Timestamp getModificationDate() {
+    public Date getModificationDate() {
         return modificationDate;
     }
 
-    public void setModificationDate(Timestamp modificationDate) {
+    public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    @Override
+    public String toString(){
+        return "Library => libraryId: " + this.libraryId
+                + ";libraryName: " + this.libraryName
+                + ";libraryDescription: " + this.libraryDescription
+                + ";CreationDate: " + this.creationDate
+                + ";ModificationDate: " + this.modificationDate;
+    }
+
+    public Set<Element> getElements() {
+        return elements;
+    }
+
+    public void setElements(Set<Element> elements) {
+        this.elements = elements;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

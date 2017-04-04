@@ -8,9 +8,10 @@ import { AppRoutingModule }     from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LibrariesComponent } from "./library/libraries.component";
 import { NewLibraryComponent } from "./library/new.library.component"
-import {LibrarySerivce} from "./library/library.service";
-import {PageNotFoundComponent} from "./not-found.component";
-import {LibraryDetailsComponent} from "./library/library.details.component";
+import { LibrarySerivce } from "./library/library.service";
+import { PageNotFoundComponent } from "./not-found.component";
+import { LibraryDetailsComponent } from "./library/library.details.component";
+import { PopoverModule } from 'ngx-popover';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {LibraryDetailsComponent} from "./library/library.details.component";
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PopoverModule
   ],
   providers: [LibrarySerivce],
   bootstrap: [AppComponent]

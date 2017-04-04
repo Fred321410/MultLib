@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,15 +17,20 @@ public class LibraryServiceImpl implements LibraryService {
     @Autowired
     private LibraryDao libraryDao;
 
-    public Library getTagByName(String name) {
-        Library l = new Library();
+    public List<Library> getLibraryByLibraryId(int libraryId) {
+        List<Library> librairies = new ArrayList<>();
         try {
-            l = libraryDao.findByName(name);
+            Library l = libraryDao.findByLibraryId(libraryId);
+            if (l != null){
+                librairies.add(libraryDao.findByLibraryId(libraryId));
+            } else {
+                return null;
+            }
         }
         catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        return l;
+        return librairies;
     }
 
     public List<Library> getAll(){
@@ -32,14 +38,25 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     public Library add(Library library){
-        Library l = new Library(library.getName(), library.getDescription());
         try {
-            l = libraryDao.save(l);
+            library = libraryDao.save(library);
         }
         catch (Exception ex) {
             throw (ex);
         }
-        return l;
+        return library;
     }
+
+    public void delete(Library library){
+        try{
+            libraryDao.delete(library);
+        }
+        catch (Exception ex){
+            throw (ex);
+        }
+
+    }
+
+
 
 }

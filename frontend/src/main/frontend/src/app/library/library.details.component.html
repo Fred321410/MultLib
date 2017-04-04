@@ -1,15 +1,33 @@
 <div *ngIf="library" class="panel panel-primary">
-  <div class="panel-heading">{{library.name}} details</div>
+  <div class="panel-heading">{{library.libraryName}} details</div>
   <div class="panel-body">
+    <div style="float: left; width: 50%">
+      <div><label>id: </label>{{library.libraryId}}</div>
+      <div>
+        <label>name:</label>
+        {{library.libraryName}}
+      </div>
+      <div>
+        <label>description:</label>
+        {{library.libraryDescription}}
+      </div>
+    </div>
+    <div style="float: right" class="btn-group-vertical" role="group">
+      <a class="btn btn-primary btn-lg" role="button" (click)="edit()">
+        <i class="fa fa-pencil-square-o fa-lg"></i> Edit</a>
+      <a class="btn btn-primary btn-lg" role="button" [popover]="myPopover">
+        <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+      <popover-content #myPopover
+                       title="Are you sure?"
+                       placement="left"
+                       [animation]="true"
+                       [closeOnClickOutside]="true" >
+        <button type="button" class="btn-primary btn-lg" (click)="delete()"
+        style="background-color: #428bca">Confirm</button>
+      </popover-content>
+    </div>
 
-    <div><label>id: </label>{{library.id}}</div>
-    <div>
-      <label>name:</label>
-      {{library.name}}
-    </div>
-    <div>
-      <label>description:</label>
-      {{library.description}}
-    </div>
+
+
   </div>
 </div>
