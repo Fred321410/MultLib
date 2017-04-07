@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="tag", uniqueConstraints = @UniqueConstraint(columnNames = {"tag_name", "library_id"}))
@@ -22,7 +24,7 @@ public class Tag {
     @Column(name="tag_id")
     private int tagId;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="library_id")
     private Library library;
 
@@ -33,6 +35,9 @@ public class Tag {
 
     @Column(name="tag_description")
     private String tagDescription;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tags")
+    private Set<Element> elements = new HashSet<>(0);
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -91,5 +96,13 @@ public class Tag {
 
     public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public Set<Element> getElements() {
+        return elements;
+    }
+
+    public void setElements(Set<Element> elements) {
+        this.elements = elements;
     }
 }

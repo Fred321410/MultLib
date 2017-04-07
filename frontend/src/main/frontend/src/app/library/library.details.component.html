@@ -13,18 +13,10 @@
       </div>
     </div>
     <div style="float: right" class="btn-group-vertical" role="group">
-      <a class="btn btn-primary btn-lg" role="button" (click)="edit()">
+      <a class="btn btn-primary btn-lg btn-block" role="button" (click)="edit()">
         <i class="fa fa-pencil-square-o fa-lg"></i> Edit</a>
-      <a class="btn btn-primary btn-lg" role="button" [popover]="myPopover">
+      <a class="btn btn-primary btn-lg btn-block" role="button" (click)=showConfirm()>
         <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-      <popover-content #myPopover
-                       title="Are you sure?"
-                       placement="left"
-                       [animation]="true"
-                       [closeOnClickOutside]="true" >
-        <button type="button" class="btn-primary btn-lg" (click)="delete()"
-        style="background-color: #428bca">Confirm</button>
-      </popover-content>
     </div>
 
 

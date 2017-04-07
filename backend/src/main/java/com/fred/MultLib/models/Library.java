@@ -34,10 +34,10 @@ public class Library {
     @Column(name = "modification_date")
     private Date modificationDate;
 
-    @OneToMany(mappedBy="library")
+    @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
     private Set<Element> elements;
 
-    @OneToMany(mappedBy="library")
+    @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
     private Set<Tag> tags;
 
 

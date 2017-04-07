@@ -19,7 +19,7 @@ public class Element {
     @Column(name="element_id")
     private int elementId;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="library_id")
     private Library library;
 
