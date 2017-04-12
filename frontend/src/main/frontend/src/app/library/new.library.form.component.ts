@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
-import {Library} from "./library";
+import { Library } from "../models/index";
 
 export interface NewLibModel {
   title:string;
@@ -9,37 +9,8 @@ export interface NewLibModel {
 
 @Component({
   selector: 'new-lib-modal',
-  template: `<div class="modal-dialog">
-                <div class="modal-content">
-                   <div class="modal-header">
-                        <button type="button" class="close" (click)="close()" >&times;</button>
-                        <h4 class="modal-title">{{title || 'Create your own new library'}}</h4>
-                   </div>
-                   <div class="modal-body">
-                     <form (ngSubmit)="onSubmit()" #libraryForm="ngForm">
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" required
-                               [(ngModel)]="this.library.libraryName" name="name"
-                               #name="ngModel">
-                        <div [hidden]="name.valid || name.pristine"
-                             class="alert alert-danger">
-                          Name is required
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" rows="2" id="description"
-                                  [(ngModel)]="library.libraryDescription" name="description"></textarea>
-                      </div>
-                    </form>
-                   </div>
-                    <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-                     <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
-                   </div>
-                 </div>
-                </div>`
+  templateUrl: './library.details.component.html',
+  styleUrls: ['./library.details.component.css']
 })
 export class NewLibraryFormComponent extends DialogComponent<NewLibModel, boolean> implements NewLibModel {
   title: string;

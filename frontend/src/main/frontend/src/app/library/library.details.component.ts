@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
-import {Library} from "./library";
-import {LibrarySerivce} from "./library.service";
+import {Library} from "../models/index";
+import {LibrarySerivce} from "../services/index";
 import { DialogService } from "ng2-bootstrap-modal";
-import { ConfirmComponent } from '../confirm.component'
-import { NewLibraryFormComponent } from './new.library.form.component';
+import { ConfirmComponent } from '../directives/confirm.component'
+import { NewLibraryFormComponent } from './index';
 
 
 @Component({

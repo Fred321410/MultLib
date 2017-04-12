@@ -40,6 +40,11 @@ public class Library {
     @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
     private Set<Tag> tags;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private User user;
+
+
 
     public Library(){}
 
@@ -119,5 +124,13 @@ public class Library {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

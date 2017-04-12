@@ -6,17 +6,18 @@ import { HttpModule } from '@angular/http'
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { LibrariesComponent } from "./library/libraries.component";
-import { LoginComponent } from './login.component';
-import { LibrarySerivce } from "./library/library.service";
-import { PageNotFoundComponent } from "./not-found.component";
-import { LibraryDetailsComponent } from "./library/library.details.component";
+import { LibrariesComponent, LibraryDetailsComponent, NewLibraryFormComponent } from "./library/index";
+import { LibrarySerivce, AuthenticationService, AlertService, UserService } from "./services/index";
+import { PageNotFoundComponent, AlertComponent, ConfirmComponent } from "./directives/index";
+import { LoginComponent, RegisterComponent } from './login/index';
 import { PopoverModule } from 'ngx-popover';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { ConfirmComponent } from './confirm.component';
-import { NewLibraryFormComponent} from './library/new.library.form.component';
-import { AuthenticationService } from './authentification.service';
+import {AuthGuard} from "./guards/index";
 
+
+// used to create fake backend
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { AuthenticationService } from './authentification.service';
     PageNotFoundComponent,
     ConfirmComponent,
     NewLibraryFormComponent,
-    LoginComponent
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,15 @@ import { AuthenticationService } from './authentification.service';
     ConfirmComponent,
     NewLibraryFormComponent
   ],
-  providers: [LibrarySerivce, AuthenticationService],
+  providers: [
+    LibrarySerivce,
+    UserService,
+    AlertService,
+    AuthenticationService,
+    AuthGuard,
+    MockBackend,
+    BaseRequestOptions
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

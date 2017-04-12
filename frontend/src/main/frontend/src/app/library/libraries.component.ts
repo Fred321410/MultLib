@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import {LibrarySerivce} from "./library.service";
-import { AuthenticationService } from '../authentification.service';
+import { LibrarySerivce } from "../services/index";
 import { DialogService } from "ng2-bootstrap-modal";
-import {Library} from "./library";
-import {NewLibraryFormComponent} from "./new.library.form.component";
+import { Library } from "../models/index";
+import { NewLibraryFormComponent } from "./index";
 
 
 @Component({
@@ -14,8 +13,7 @@ import {NewLibraryFormComponent} from "./new.library.form.component";
 export class LibrariesComponent {
 
   constructor(private _libraryService: LibrarySerivce,
-              private dialogService:DialogService,
-              private authervice:AuthenticationService) {}
+              private dialogService:DialogService) {}
   libraries: Library[];
   selectedLibrary: Library;
   library: Library;
@@ -26,7 +24,6 @@ export class LibrariesComponent {
   }
 
   ngOnInit(){
-    this.authervice.checkCredentials();
     this.getLibraries();
     this.library = new Library('','');
   }
