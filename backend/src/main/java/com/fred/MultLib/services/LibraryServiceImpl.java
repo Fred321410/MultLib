@@ -2,6 +2,7 @@ package com.fred.MultLib.services;
 
 import com.fred.MultLib.models.Library;
 import com.fred.MultLib.models.dao.LibraryDao;
+import com.fred.MultLib.models.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,20 +19,24 @@ public class LibraryServiceImpl implements LibraryService {
     @Autowired
     private LibraryDao libraryDao;
 
-    public List<Library> getLibraryByLibraryId(int libraryId) {
-        List<Library> librairies = new ArrayList<>();
+    @Autowired
+    UserDao userDao;
+
+    public List<Library> getLibraryByLibraryIdAndUser(int libraryId, String username) {
+        List<Library> libraries = new ArrayList<>();
         try {
-            Library l = libraryDao.findByLibraryId(libraryId);
-            if (l != null){
-                librairies.add(libraryDao.findByLibraryId(libraryId));
-            } else {
-                return null;
-            }
+            libraries = getLibraryByUser(username);
         }
         catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        return librairies;
+        return libraries.stream().filter(library -> library.getLibraryId() == libraryId).collect(Collectors.toList());
+    }
+
+    public List<Library> getLibraryByUser(String username){
+        List<Library> libraries = new ArrayList<>();
+        libraries.addAll(userDao.findByUsername(username).getLibraries());
+        return libraries;
     }
 
     public List<Library> getAll(){

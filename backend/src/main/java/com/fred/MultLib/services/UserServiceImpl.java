@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserDetailsService  {
             return JwtUserFactory.create(user);
         }
     }
+
+    public User getUserByUsername(String username) {
+        User user = userDao.findByUsername(username);
+
+        return user;
+    }
 }

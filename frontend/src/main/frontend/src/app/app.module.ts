@@ -7,7 +7,7 @@ import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LibrariesComponent, LibraryDetailsComponent, NewLibraryFormComponent } from "./library/index";
-import { LibrarySerivce, AuthenticationService, AlertService, UserService } from "./services/index";
+import { LibrarySerivce, AuthenticationService, AlertService } from "./services/index";
 import { PageNotFoundComponent, AlertComponent, ConfirmComponent } from "./directives/index";
 import { LoginComponent, RegisterComponent } from './login/index';
 import { PopoverModule } from 'ngx-popover';
@@ -46,7 +46,6 @@ import { BaseRequestOptions } from '@angular/http';
   ],
   providers: [
     LibrarySerivce,
-    UserService,
     AlertService,
     AuthenticationService,
     AuthGuard,

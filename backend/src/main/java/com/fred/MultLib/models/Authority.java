@@ -1,5 +1,7 @@
 package com.fred.MultLib.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -23,6 +25,7 @@ public class Authority {
     @Enumerated(EnumType.STRING)
     private AuthorityName authorityName;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authorities")
     private Set<User> users = new HashSet<>(0);
 

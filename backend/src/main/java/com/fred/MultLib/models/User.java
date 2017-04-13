@@ -1,6 +1,8 @@
 package com.fred.MultLib.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnTransformer;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -63,6 +65,7 @@ public class User {
     @JoinTable(name = "user_authority", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "authority_id") })
     private List<Authority> authorities;
 
+    @JsonIgnore
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private Set<Library> libraries;
 

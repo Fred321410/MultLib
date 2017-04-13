@@ -44,6 +44,7 @@ export class LibrariesComponent {
     this.libraries = this.libraries.filter(function (el) {
       return el.libraryId != libraryDeleted.libraryId;
     })
+    this.selectedLibrary = null;
     //this.getLibraries();
   }
 

@@ -9,8 +9,8 @@ export interface NewLibModel {
 
 @Component({
   selector: 'new-lib-modal',
-  templateUrl: './library.details.component.html',
-  styleUrls: ['./library.details.component.css']
+  templateUrl: './new.library.form.component.html',
+  styleUrls: ['./new.library.form.component.css']
 })
 export class NewLibraryFormComponent extends DialogComponent<NewLibModel, boolean> implements NewLibModel {
   title: string;

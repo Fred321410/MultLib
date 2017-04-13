@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService, UserService } from '../services/index';
+import { AlertService } from '../services/index';
 
 @Component({
   moduleId: module.id,
@@ -14,10 +14,9 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private userService: UserService,
     private alertService: AlertService) { }
 
-  register() {
+/*  register() {
     this.loading = true;
     this.userService.create(this.model)
       .subscribe(
@@ -29,5 +28,5 @@ export class RegisterComponent {
           this.alertService.error(error);
           this.loading = false;
         });
-  }
+  }*/
 }

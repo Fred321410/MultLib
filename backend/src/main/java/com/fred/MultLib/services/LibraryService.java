@@ -8,9 +8,11 @@ public interface LibraryService {
 
 
 
-    List<Library> getLibraryByLibraryId(int libraryId);
+    List<Library> getLibraryByLibraryIdAndUser(int libraryId, String username);
 
     List<Library> getAll();
+
+    List<Library> getLibraryByUser(String username);
 
     Library add(Library library);
 
