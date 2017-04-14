@@ -15,6 +15,11 @@ public class Authority {
 
     }
 
+    public Authority(Long id, AuthorityName authorityName){
+        this.authorityId = id;
+        this.authorityName = authorityName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="authority_id")
@@ -26,7 +31,7 @@ public class Authority {
     private AuthorityName authorityName;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authorities")
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "authorities")
     private Set<User> users = new HashSet<>(0);
 
     public Authority(AuthorityName authorityName) {

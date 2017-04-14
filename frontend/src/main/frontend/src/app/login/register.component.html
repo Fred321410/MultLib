@@ -3,13 +3,13 @@
   <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label >First Name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
-      <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+      <input type="text" class="form-control" name="firstname" [(ngModel)]="model.firstname" #firstname="ngModel" required />
+      <div *ngIf="f.submitted && !firstname.valid" class="help-block">First Name is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label>Last Name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
-      <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+      <input type="text" class="form-control" name="lastname" [(ngModel)]="model.lastname" #lastname="ngModel" required />
+      <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last Name is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label>Username</label>
@@ -20,6 +20,11 @@
       <label>Password</label>
       <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
       <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <label>Email</label>
+      <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+      <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
     </div>
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">Register</button>

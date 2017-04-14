@@ -31,4 +31,13 @@ public class UserServiceImpl implements UserDetailsService  {
 
         return user;
     }
+
+    public void add(User user){
+        try {
+            userDao.save(user);
+        }
+        catch (Exception ex) {
+            throw (ex);
+        }
+    }
 }

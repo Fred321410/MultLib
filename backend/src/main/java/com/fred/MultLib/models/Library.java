@@ -40,7 +40,7 @@ public class Library {
     @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
     private Set<Tag> tags;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @JoinColumn(name="user_id")
     private User user;
 

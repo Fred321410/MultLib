@@ -8,11 +8,3 @@
   font-size: large;
 }
 
-.action:hover{
-  cursor: pointer; cursor: hand;
-}
-
-.action:active{
-  width: 10px;
-  height: auto;
-}

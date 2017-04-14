@@ -18,6 +18,7 @@ import {AuthGuard} from "./guards/index";
 // used to create fake backend
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { BaseRequestOptions } from '@angular/http';
     LibrarySerivce,
     AlertService,
     AuthenticationService,
+    UserService,
     AuthGuard,
     MockBackend,
     BaseRequestOptions

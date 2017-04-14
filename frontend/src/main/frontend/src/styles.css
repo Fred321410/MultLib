@@ -1,0 +1,15 @@
+/*.action{
+  border: solid 10px transparent;
+}
+
+.action:hover{
+  cursor: pointer; cursor: hand;
+  border-color: green;
+}*/
+
+/*
+.action:active{
+  width: 10px;
+  height: auto;
+}
+*/

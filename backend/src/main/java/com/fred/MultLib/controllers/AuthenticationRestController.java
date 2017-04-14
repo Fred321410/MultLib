@@ -1,4 +1,8 @@
 package com.fred.MultLib.controllers;
+import com.fred.MultLib.models.Authority;
+import com.fred.MultLib.models.AuthorityName;
+import com.fred.MultLib.models.Library;
+import com.fred.MultLib.models.User;
 import com.fred.MultLib.security.JwtAuthenticationRequest;
 import com.fred.MultLib.security.JwtTokenUtil;
 import com.fred.MultLib.security.JwtUser;
@@ -15,12 +19,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 public class AuthenticationRestController {
@@ -36,6 +42,19 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @RequestMapping(value="/registration", method = RequestMethod.POST)
+    public User add(@RequestBody User user) {
+        user.setEnabled(true);
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(new Authority(new Long(2), AuthorityName.ROLE_USER));
+        user.setAuthorities(authorities);
+        user.setLastPasswordResetDate(new Date());
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.add(user);
+        return user;
+    }
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {

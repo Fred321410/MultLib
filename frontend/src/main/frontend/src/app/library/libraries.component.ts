@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LibrarySerivce } from "../services/index";
+import { LibrarySerivce, AlertService } from "../services/index";
 import { DialogService } from "ng2-bootstrap-modal";
 import { Library } from "../models/index";
 import { NewLibraryFormComponent } from "./index";
@@ -13,7 +13,8 @@ import { NewLibraryFormComponent } from "./index";
 export class LibrariesComponent {
 
   constructor(private _libraryService: LibrarySerivce,
-              private dialogService:DialogService) {}
+              private dialogService: DialogService,
+              private alertService: AlertService) {}
   libraries: Library[];
   selectedLibrary: Library;
   library: Library;
@@ -35,6 +36,7 @@ export class LibrariesComponent {
       .subscribe((isConfirmed = true)=>{
         if(isConfirmed){
           this.newLibrary();
+          this.alertService.success('Your library has been created');
           this.library = new Library('','');
         }
       });
@@ -51,7 +53,7 @@ export class LibrariesComponent {
   getLibraries(){
     this._libraryService.getLibraries().subscribe(
       data => this.libraries = data,
-      error => alert(error),
+      error => this.alertService.error(error),
       () => console.log("Finished")
     );
   }
@@ -60,7 +62,7 @@ export class LibrariesComponent {
     this._libraryService.create(this.library)
       .subscribe(
         data => this.libraries.push(data),
-        error => alert(error)
+        error => this.alertService.error(error)
       );
   }
 

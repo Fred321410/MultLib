@@ -19,11 +19,11 @@ public class Element {
     @Column(name="element_id")
     private int elementId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name="library_id")
     private Library library;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "element_tag", joinColumns = { @JoinColumn(name = "element_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     private Set<Tag> tags = new HashSet<>(0);
 

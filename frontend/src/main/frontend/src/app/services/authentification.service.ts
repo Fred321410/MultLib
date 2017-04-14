@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthenticationService {
@@ -21,6 +23,7 @@ login(username: string, password: string) {
         }
       });
   }
+
 
   jwt() : RequestOptions {
     // create authorization header with jwt token

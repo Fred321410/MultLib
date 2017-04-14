@@ -24,7 +24,7 @@ public class Tag {
     @Column(name="tag_id")
     private int tagId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name="library_id")
     private Library library;
 
@@ -36,7 +36,7 @@ public class Tag {
     @Column(name="tag_description")
     private String tagDescription;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tags")
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "tags")
     private Set<Element> elements = new HashSet<>(0);
 
     @CreationTimestamp
