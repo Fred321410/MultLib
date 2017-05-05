@@ -1,25 +1,27 @@
 <div *ngIf="library" class="panel panel-primary">
-  <div class="panel-heading">{{library.libraryName}} details</div>
+  <div class="panel-heading">{{library.libraryName}}
+    <span class="pull-right" >
+      <a (click)="edit()" class="faa-parent animated-hover">
+                <i style="color: white" class="fa fa-pencil-square-o fa-lg faa-pulse"></i>
+            </a>
+      <a (click)="showConfirm()" class="faa-parent animated-hover">
+                <i style="color: white" class="fa fa-trash-o fa-lg faa-pulse"></i>
+            </a>
+    </span></div>
   <div class="panel-body">
-    <div style="float: left; width: 50%">
-      <div><label>id: </label>{{library.libraryId}}</div>
       <div>
-        <label>name:</label>
-        {{library.libraryName}}
-      </div>
-      <div>
-        <label>description:</label>
         {{library.libraryDescription}}
       </div>
+      <br>
+      <div class="list-group">
+        <a *ngFor="let element of library.elements" (dblclick)="onDblElementSelect(element)" (click)="onElementSelect(element)" [class.active]="element === selectedElement" class="list-group-item">
+          <span *ngIf="!idsElementsToExpend.includes(element.elementId) || element.tags.length === 0" class="badge">{{element.tags ? element.tags.length : 0}}</span>{{element.elementName}}
+          <div class="list-group" *ngIf="idsElementsToExpend.includes(element.elementId) && element.tags.length !== 0">
+            <a *ngFor="let tag of element.tags" class="list-group-item">
+              {{tag.tagName}}
+            </a>
+          </div>
+        </a>
+      </div>
     </div>
-    <div style="float: right" class="btn-group-vertical" role="group">
-      <a class="btn btn-primary btn-lg btn-block" role="button" (click)="edit()">
-        <i class="fa fa-pencil-square-o fa-lg"></i> Edit</a>
-      <a class="btn btn-primary btn-lg btn-block" role="button" (click)=showConfirm()>
-        <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-    </div>
-
-
-
-  </div>
 </div>

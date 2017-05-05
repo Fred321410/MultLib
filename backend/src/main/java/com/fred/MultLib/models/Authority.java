@@ -61,4 +61,27 @@ public class Authority {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if( ! (obj instanceof Authority) ) return false;
+
+        Authority other = (Authority) obj;
+
+        if(this.authorityName == null){
+            if(other.authorityName != null){
+                return false;
+            }
+        } else {
+            if(!other.authorityName.equals(this.authorityName)){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
 }

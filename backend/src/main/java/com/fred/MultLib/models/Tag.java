@@ -1,6 +1,9 @@
 package com.fred.MultLib.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,15 +22,20 @@ public class Tag {
         this.tagDescription = tagDescription;
     }
 
+    public Tag(){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="tag_id")
     private int tagId;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade= {CascadeType.REFRESH})
     @JoinColumn(name="library_id")
+    @JsonBackReference(value="library-tags")
     private Library library;
-
+    //TODO EQUALS AND HASH
 
     @NotNull
     @Column(name="tag_name")
@@ -36,7 +44,8 @@ public class Tag {
     @Column(name="tag_description")
     private String tagDescription;
 
-    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "tags")
+    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "tags")
+    @JsonBackReference(value="elements-tags")
     private Set<Element> elements = new HashSet<>(0);
 
     @CreationTimestamp
@@ -105,4 +114,27 @@ public class Tag {
     public void setElements(Set<Element> elements) {
         this.elements = elements;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if( ! (obj instanceof Tag) ) return false;
+
+        Tag other = (Tag) obj;
+
+        if(this.tagName == null){
+            if(other.tagName != null){
+                return false;
+            }
+        } else {
+            if(!other.tagName.equals(this.tagName)){
+                return false;
+            }
+        }
+
+        return this.library == other.library;
+
+    }
+
 }

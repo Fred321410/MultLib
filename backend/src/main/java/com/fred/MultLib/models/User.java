@@ -148,4 +148,15 @@ public class User {
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if( ! (obj instanceof User) ) return false;
+
+        User other = (User) obj;
+
+        return this.username == null ? other.username == null : other.username.equals(this.username);
+    }
 }

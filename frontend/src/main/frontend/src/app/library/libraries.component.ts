@@ -18,7 +18,6 @@ export class LibrariesComponent {
   libraries: Library[];
   selectedLibrary: Library;
   library: Library;
-  title = 'Your current Libraries';
 
   onSelect(library: Library): void {
     this.selectedLibrary = library;

@@ -9,7 +9,7 @@
   <div class="panel-body">
     <div class="list-group">
       <a *ngFor="let library of libraries" (click)="onSelect(library)" [class.active]="library === selectedLibrary" class="list-group-item">
-        <span class="badge">{{library.libraryId}}</span>{{library.libraryName}}
+        <span class="badge">{{library.elements ? library.elements.length : 0}}</span>{{library.libraryName}}
       </a>
     </div>
   </div>

@@ -16,7 +16,7 @@ public class ElementController {
     private ElementServiceImpl elementService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Element> get(@RequestParam(value = "libraryId", required = false) Integer libraryId) {
+    @ResponseBody public List<Element> get(@RequestParam(value = "libraryId") Integer libraryId) {
         List<Element> elements;
         try {
             if(libraryId == null){

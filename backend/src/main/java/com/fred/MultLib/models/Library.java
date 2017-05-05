@@ -1,5 +1,6 @@
 package com.fred.MultLib.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="library")
+@Table(name="library", uniqueConstraints = {@UniqueConstraint(columnNames = {"library_name", "user_id"})})
 public class Library {
 
     @Id
@@ -18,7 +19,7 @@ public class Library {
     private int libraryId;
 
     @NotNull
-    @Column(name="library_name", unique = true)
+    @Column(name="library_name")
     private String libraryName;
 
     @Column(name="library_description")
@@ -35,9 +36,11 @@ public class Library {
     private Date modificationDate;
 
     @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
+    @JsonManagedReference(value="library-elements")
     private Set<Element> elements;
 
     @OneToMany(mappedBy="library", cascade=CascadeType.ALL)
+    @JsonManagedReference(value="library-tags")
     private Set<Tag> tags;
 
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
@@ -132,5 +135,27 @@ public class Library {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if( ! (obj instanceof Library) ) return false;
+
+        Library other = (Library) obj;
+
+        if(this.libraryName == null){
+            if(other.libraryName != null){
+                return false;
+            }
+        } else {
+            if(!other.libraryName.equals(this.libraryName)){
+                return false;
+            }
+        }
+
+        return this.user == other.user;
+
     }
 }

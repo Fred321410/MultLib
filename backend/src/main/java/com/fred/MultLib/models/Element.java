@@ -1,5 +1,8 @@
 package com.fred.MultLib.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fred.MultLib.models.Library;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,12 +22,15 @@ public class Element {
     @Column(name="element_id")
     private int elementId;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade= {CascadeType.REFRESH})
     @JoinColumn(name="library_id")
+    @JsonBackReference(value="library-elements")
     private Library library;
 
-    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "element_tag", joinColumns = { @JoinColumn(name = "element_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "element_tag", joinColumns = { @JoinColumn(name = "element_id", referencedColumnName = "element_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id", referencedColumnName = "tag_id") })
+    @JsonManagedReference(value="elements-tags")
+    @JsonIgnore
     private Set<Tag> tags = new HashSet<>(0);
 
 
@@ -50,6 +56,10 @@ public class Element {
         this.library = library;
         this.elementName = elementName;
         this.elementDescription = elementDescription;
+    }
+
+    public Element(){
+
     }
 
     public String getElementName() {
@@ -107,4 +117,27 @@ public class Element {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if( ! (obj instanceof Element) ) return false;
+
+        Element other = (Element) obj;
+
+        if(this.elementName == null){
+            if(other.elementName != null){
+                return false;
+            }
+        } else {
+            if(!other.elementName.equals(this.elementName)){
+                return false;
+            }
+        }
+
+        return this.library == other.library;
+
+    }
+
 }
